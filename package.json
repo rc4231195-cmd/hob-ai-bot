@@ -1,0 +1,26 @@
+{
+  "name": "hob-ai-bot",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Production-ready Telegram AI bot powered by Google Gemini on Cloudflare Workers",
+  "type": "module",
+  "engines": {
+    "node": ">=20.3.0"
+  },
+  "scripts": {
+    "dev": "wrangler dev",
+    "build": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "deploy": "wrangler deploy",
+    "db:migrate:local": "wrangler d1 migrations apply hob-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply hob-db --remote"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "4.20260702.1",
+    "typescript": "5.9.3",
+    "vitest": "3.2.7",
+    "wrangler": "4.86.0"
+  }
+}
