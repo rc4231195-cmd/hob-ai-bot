@@ -20,7 +20,7 @@ HOB Telegram AI is a production-ready Telegram bot powered by Google Gemini and 
 - Safe user-facing errors without secrets or stack traces
 - Strict TypeScript
 - Vitest unit tests
-- GitHub Actions CI and deployment workflows
+- GitHub Actions CI and deployment workflow definitions
 
 ## Architecture
 
@@ -208,10 +208,18 @@ Replace the placeholders locally. Do not commit the resulting command or URL if 
 
 ## GitHub Actions
 
-The repository includes:
+The complete workflow definitions are included in:
 
-- `.github/workflows/ci.yml` — typechecks and tests pull requests and pushes to `main`
-- `.github/workflows/deploy.yml` — verifies the project, then deploys to Cloudflare Workers
+- `workflow-templates/ci.yml` — typechecks and tests pull requests and pushes to `main`
+- `workflow-templates/deploy.yml` — verifies the project, then deploys to Cloudflare Workers
+
+They are stored as templates because the GitHub authorization used to build this repository did not include the `workflow` scope required to write `.github/workflows/`. After granting that scope or using your own GitHub account, copy them into place:
+
+```bash
+mkdir -p .github/workflows
+cp workflow-templates/ci.yml .github/workflows/ci.yml
+cp workflow-templates/deploy.yml .github/workflows/deploy.yml
+```
 
 Configure these GitHub repository secrets:
 
@@ -250,10 +258,9 @@ Unknown commands receive a short message directing the user to `/help`.
 ```text
 hob-ai-bot/
 │
-├── .github/
-│   └── workflows/
-│       ├── ci.yml
-│       └── deploy.yml
+├── workflow-templates/
+│   ├── ci.yml
+│   └── deploy.yml
 │
 ├── migrations/
 │   └── 0001_initial.sql
